@@ -1,13 +1,26 @@
-const app = require('express')();
-const PORT = 8080;
+const express = require('express');
+const bodyParser = require('body-parser');
 
-app.get('/tshirt', (req, res) => {
-    res.status(200).send({
-        tshirt: '43ijff',
-        size: 'large'
-    })
+const app = express();
+const port = 3000; // You can change this to any available port
+
+// Middleware to parse JSON requests
+app.use(bodyParser.json());
+
+// Define a route to handle POST requests
+app.post('/api/data', (req, res) => {
+  // Access the data sent from Unity WebGL
+  const data = req.body;
+
+  // Call your function here with the data
+  // Replace this with your actual function
+  // Example: myFunction(data);
+
+  // Send a response back to Unity
+  res.json({ message: 'Data received successfully' });
 });
-app.listen(
-    PORT,
-    () => console.log(`its alive on https://localhost:${PORT}`)
-)
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
